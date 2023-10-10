@@ -26,7 +26,7 @@ function Header() {
                 </h1>
             </Link>
             
-            <form>
+            <form className={style.form}>
                 <input type="text" placeholder='Search...' />
                 <FaSearch className={style.faSearch}/>
             </form>
