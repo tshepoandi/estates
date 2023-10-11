@@ -10,17 +10,17 @@ function Signup() {
     span:"text-blue-700",
     signInDiv:"flex gap-2 mt-5"
   }
-  let [formData,setFormData] = useState({
- 
-  })
+ const [formData, setFormData] = useState({});
+
   const handleChange = (e) => {
-    setFormData = {
+    // Update the formData state using the setFormData function
+    setFormData({
       ...formData,
       [e.target.id]: e.target.value
-    }
-  }
+    });
+  };
 
-  console.log(formData)
+  console.log(formData);
   return (
 
     <div className={styling.div}>
