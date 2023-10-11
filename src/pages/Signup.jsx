@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {Link} from 'react-router-dom'
 function Signup() {
   const styling = {
@@ -10,13 +10,25 @@ function Signup() {
     span:"text-blue-700",
     signInDiv:"flex gap-2 mt-5"
   }
+  let [formData,setFormData] = useState({
+ 
+  })
+  const handleChange = (e) => {
+    setFormData = {
+      ...formData,
+      [e.target.id]: e.target.value
+    }
+  }
+
+  console.log(formData)
   return (
+
     <div className={styling.div}>
       <h1 className={styling.h1Tag}>SignUp</h1>
       <form className={styling.form}>
-        <input type="text" placeholder='username' className={styling.formInput} />
-        <input type="text" placeholder='email' className={styling.formInput} />
-        <input type="text" placeholder='password' className={styling.formInput} />
+        <input type="text" placeholder='username' className={styling.formInput} id='username' onChange={handleChange} />
+        <input type="text" placeholder='email' className={styling.formInput} id='email' onChange={handleChange}/>
+        <input type="text" placeholder='password' className={styling.formInput} id='password' onChange={handleChange}/>
         <button className={styling.signupButton}>Sign Up</button>
       </form>
         <div className={styling.signInDiv}>
