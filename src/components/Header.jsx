@@ -37,8 +37,8 @@ function Header() {
                 <Link to="/about">
                     <li className={style.listComponent}>About</li>
                 </Link>
-                <Link to="/sign-in">
-                    <li className='text-slate-70 hover:underline'>Sign In</li>
+                <Link to="/sign-up">
+                    <li className='text-slate-70 hover:underline'>Sign up</li>
                 </Link>
             </ul>
         </div>
