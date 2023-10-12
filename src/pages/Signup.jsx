@@ -20,12 +20,17 @@ function Signup() {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("form submitted")
+  };
+
   console.log(formData);
   return (
 
     <div className={styling.div}>
-      <h1 className={styling.h1Tag}>SignUp</h1>
-      <form className={styling.form}>
+      <h1 className={styling.h1Tag}>Sign Up</h1>
+      <form onSubmit={handleSubmit} className={styling.form}>
         <input type="text" placeholder='username' className={styling.formInput} id='username' onChange={handleChange} />
         <input type="text" placeholder='email' className={styling.formInput} id='email' onChange={handleChange}/>
         <input type="text" placeholder='password' className={styling.formInput} id='password' onChange={handleChange}/>
