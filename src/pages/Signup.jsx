@@ -20,12 +20,20 @@ function Signup() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log("form submitted")
+    const res = await fetch('/api/auth/signup',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    const data = await res.json();
+    console.log(data);
   };
 
-  console.log(formData);
   return (
 
     <div className={styling.div}>
