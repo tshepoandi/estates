@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 function Signup() {
   const styling = {
     h1Tag: "text-3xl text-center font-semibold my-7",
@@ -10,8 +10,10 @@ function Signup() {
     span:"text-blue-700",
     signInDiv:"flex gap-2 mt-5"
   }
- const [formData, setFormData] = useState({});
-
+  const [formData, setFormData] = useState({});
+  const [error,setError] = useState(null);
+  const [loading,setLoading] = useState(false);
+  const navigate = useNavigate
   const handleChange = (e) => {
     // Update the formData state using the setFormData function
     setFormData({
@@ -22,16 +24,32 @@ function Signup() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("form submitted")
-    const res = await fetch('/api/auth/signup',{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-    const data = await res.json();
-    console.log(data);
+    setLoading(true)
+
+    try {
+      const res = await fetch('/api/auth/signup',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      const data = await res.json();
+      if(data.success === false) {
+        setError(data.message)
+        setLoading(false)
+        return;
+      }
+      setLoading(false)
+      setError(null)
+      navigate("/sign-in")
+      console.log(data);
+      console.log("form submitted")    
+    } catch (error) {
+      setLoading(false)
+      setError(error.message)
+    }
+  
   };
 
   return (
@@ -42,7 +60,9 @@ function Signup() {
         <input type="text" placeholder='username' className={styling.formInput} id='username' onChange={handleChange} />
         <input type="text" placeholder='email' className={styling.formInput} id='email' onChange={handleChange}/>
         <input type="text" placeholder='password' className={styling.formInput} id='password' onChange={handleChange}/>
-        <button className={styling.signupButton}>Sign Up</button>
+        <button disabled={loading} className={styling.signupButton}>
+          {loading? "Loading...": "Signup" }
+        </button>
       </form>
         <div className={styling.signInDiv}>
           <p>Have an account? <span className={styling.span} ><Link to={"/sign-in"}>sign In</Link></span></p>
