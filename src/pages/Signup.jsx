@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import {Link,useNavigate} from 'react-router-dom'
+import Oauth from '../components/Oauth';
 function Signup() {
   const styling = {
     h1Tag: "text-3xl text-center font-semibold my-7",
@@ -43,7 +44,7 @@ function Signup() {
       }
       setLoading(false)
       setError(null)
-      navigate("/")
+      navigate("/sign-in")
       console.log(data);
       console.log("form submitted")    
     } catch (error) {
@@ -64,12 +65,15 @@ function Signup() {
         <button disabled={loading} className={styling.signupButton}>
           {loading? "Loading...": "Sign Up" }
         </button>
+        <Oauth></Oauth>
       </form>
+      
         <div className={styling.signInDiv}>
           <p>Have an account? <span className={styling.span} ><Link to={"/sign-in"}>Sign In</Link></span></p>
         </div>
        {error && <p className={styling.error}>{error}</p>}
     </div>
+    
    
   )
 }
