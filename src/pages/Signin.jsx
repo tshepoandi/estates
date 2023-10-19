@@ -67,7 +67,7 @@ function Signin() {
         <div className={styling.signInDiv}>
           <p>Dont have an account? <span className={styling.span} ><Link to={"/sign-up"}>Sign Up</Link></span></p>
         </div>
-        {error && <p className={styling.error}>{error}</p>}
+        {error && <p className={styling.error}>{error.message}</p>}
        
     </div>
    
