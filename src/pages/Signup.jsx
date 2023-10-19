@@ -6,14 +6,15 @@ function Signup() {
     formInput: "border p-3 rounded-lg", 
     form: "flex flex-col gap-4",
     div: "p-3 max-w-lg mx-auto",
-    signupButton: "bg-slate-700 text-white p-3 rounded-lg Uppercase hover:opacity-95",
+    signupButton: "bg-slate-700 text-white p-3 rounded-lg Uppercase hover:opacity-95 uppercase",
     span:"text-blue-700",
-    signInDiv:"flex gap-2 mt-5"
+    signInDiv:"flex gap-2 mt-5",
+    error:"text-red-500 mt-5"
   }
   const [formData, setFormData] = useState({});
   const [error,setError] = useState(null);
   const [loading,setLoading] = useState(false);
-  const navigate = useNavigate
+  const navigate = useNavigate()
   const handleChange = (e) => {
     // Update the formData state using the setFormData function
     setFormData({
@@ -27,7 +28,7 @@ function Signup() {
     setLoading(true)
 
     try {
-      const res = await fetch('/api/auth/signup',{
+      const res = await fetch('/api/auth/sign-up',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -42,7 +43,7 @@ function Signup() {
       }
       setLoading(false)
       setError(null)
-      navigate("/sign-in")
+      navigate("/")
       console.log(data);
       console.log("form submitted")    
     } catch (error) {
@@ -61,13 +62,13 @@ function Signup() {
         <input type="text" placeholder='email' className={styling.formInput} id='email' onChange={handleChange}/>
         <input type="text" placeholder='password' className={styling.formInput} id='password' onChange={handleChange}/>
         <button disabled={loading} className={styling.signupButton}>
-          {loading? "Loading...": "Signup" }
+          {loading? "Loading...": "Sign Up" }
         </button>
       </form>
         <div className={styling.signInDiv}>
-          <p>Have an account? <span className={styling.span} ><Link to={"/sign-in"}>sign In</Link></span></p>
+          <p>Have an account? <span className={styling.span} ><Link to={"/sign-in"}>Sign In</Link></span></p>
         </div>
-       
+       {error && <p className={styling.error}>{error}</p>}
     </div>
    
   )
